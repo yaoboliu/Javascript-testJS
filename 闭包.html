@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+    //闭包
+    /*JS采用词法作用域，也就是，函数的执行依赖于变量作用域，这个作用域时在函数定义时决定的，而不是在调用时决定的。
+    * 为了实现这种词法作用域，JS函数对象的内部状态，不仅包含函数的代码逻辑，还必须引用当前的作用域链。
+    *
+    * 函数对象可以通过作用域链相互关联起来，函数体内部的变量都可以保存在函数作用域内，这种特性称为“闭包”。
+    * 可以理解为：函数变量可以被隐藏在作用域链之内，因此看起来时函数将变量“包裹”起来。
+    * */
+
+    //理解闭包首先要了解嵌套函数的词法作用域规则。
+    var scope = "global scope"; //全局变量
+    function checkScope(){
+        var scope = "local scope"; // 局部变量
+        function f(){
+            return scope; // 在作用域中返回这个值
+        }
+        return f(); //返回的是f()函数的结果
+    }
+    checkScope(); // => "local scope"
+
+    var scope2="global scope";
+    function checkScope2(){
+        var scope2="local scope";
+        function f(){
+            return scope2;
+        }
+        return f; // 返回的是函数内嵌套的对象，而不是直接返回结果。
+    }
+    checkScope2()(); //"local scope"
+</script>
+</body>
+</html>
